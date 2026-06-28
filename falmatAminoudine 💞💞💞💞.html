@@ -1,4 +1,4 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,27 @@
             justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- EFFET PÉTALES DE ROSES ET FLEURS ROMANTIQUES --- */
+        body::before {
+            content: "🌸 🌹 🌺 🌸 🌹";
+            position: fixed;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            font-size: 24px;
+            opacity: 0.15;
+            letter-spacing: 40px;
+            animation: fallingFlowers 10s linear infinite;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        @keyframes fallingFlowers {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         .container {
@@ -29,13 +50,73 @@
             width: 90%;
             margin: 20px;
             border: 2px solid #ffccd5;
+            z-index: 1;
         }
 
         h1 {
             color: #d63031;
-            font-size: 2.8rem;
+            font-size: 2.3rem;
             margin-bottom: 10px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* --- ENCADREMENT DES PHOTOS DANS UN GRAND CŒUR --- */
+        .heart-frame-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 35px 0;
+            position: relative;
+        }
+
+        .heart-frame {
+            position: relative;
+            width: 320px;
+            height: 300px;
+            background: #ff7675;
+            clip-path: path("M160,50 C110,-10 20,-10 20,70 C20,150 110,210 160,270 C210,210 300,150 300,70 C300,-10 210,-10 160,50 Z");
+            box-shadow: 0 10px 25px rgba(214, 48, 49, 0.4);
+            display: flex;
+            overflow: hidden;
+            border: 6px solid #fff;
+            animation: loveGlow 2s infinite alternate;
+        }
+
+        /* Découpage 50% gauche pour Aminoudine, 50% droite pour Falmata */
+        .photo-left, .photo-right {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-left {
+            border-right: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .heart-frame:hover .photo-left { transform: scale(1.1); }
+        .heart-frame:hover .photo-right { transform: scale(1.1); }
+
+        /* Décorations de fleurs autour du cœur */
+        .flower-deco {
+            position: absolute;
+            font-size: 30px;
+            z-index: 2;
+            animation: floatDeco 3s infinite alternate;
+        }
+        .f1 { top: -10px; left: 60px; }
+        .f2 { top: -10px; right: 60px; }
+        .f3 { bottom: 10px; left: 80px; }
+        .f4 { bottom: 10px; right: 80px; }
+
+        @keyframes loveGlow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #d63031); }
+            100% { transform: scale(1.03); filter: drop-shadow(0 0 20px #e84393); }
+        }
+
+        @keyframes floatDeco {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); }
         }
 
         /* --- EFFET COULEURS D'AMOUR CLIGNOTANTES --- */
@@ -48,10 +129,10 @@
         }
 
         @keyframes loveColors {
-            0% { color: #d63031; text-shadow: 0 0 5px rgba(214,48,49,0.3); }     /* Rouge Passion */
-            33% { color: #e84393; text-shadow: 0 0 8px rgba(232,67,147,0.4); }    /* Rose Éclatant */
-            66% { color: #6c5ce7; text-shadow: 0 0 5px rgba(108,92,231,0.3); }    /* Violet Doux */
-            100% { color: #ff7675; text-shadow: 0 0 8px rgba(255,118,117,0.4); }  /* Corail Tendre */
+            0% { color: #d63031; text-shadow: 0 0 5px rgba(214,48,49,0.3); }
+            33% { color: #e84393; text-shadow: 0 0 8px rgba(232,67,147,0.4); }
+            66% { color: #6c5ce7; text-shadow: 0 0 5px rgba(108,92,231,0.3); }
+            100% { color: #ff7675; text-shadow: 0 0 8px rgba(255,118,117,0.4); }
         }
 
         .signature {
@@ -79,27 +160,6 @@
             0% { text-shadow: 0 0 5px #d63031; }
             100% { text-shadow: 0 0 25px #ff7675, 0 0 40px #e84393; }
         }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            border: 2px solid #fff;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.08) rotate(2deg);
-        }
     </style>
 </head>
 <body>
@@ -108,19 +168,27 @@
         <div class="heart">❤️</div>
         <h1>Pour Toi mon Couleur de l'amour falmata 💖💖💞💞💝💝</h1>
         
-        <!-- Paroles Romantiques Animées -->
+        <!-- SECTION GRAND CŒUR AVEC VOS PHOTOS ET DESIGN MODERNE -->
+        <div class="heart-frame-container">
+            <span class="flower-deco f1">🌹</span>
+            <span class="flower-deco f2">🌸</span>
+            <div class="heart-frame">
+                <!-- Image d'Aminoudine à gauche -->
+                <img class="photo-left" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" alt="Aminoudine">
+                <!-- Image de Falmata à droite -->
+                <img class="photo-right" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Falmata">
+            </div>
+            <span class="flower-deco f3">🌺</span>
+            <span class="flower-deco f4">💖</span>
+        </div>
+
+        <!-- Paroles Romantiques Animées (Inchangées) -->
         <p class="romantic-text">
             Je sais que tu es fâchée contre moi en ce moment, et rien que l'idée de t'avoir blessée me fait de la peine. Tu comptes énormément pour moi, ton sourire me manque tellement... <br><br>
-            À travers cette petite surprise, je voulais juste te rappeler à quel point mon amour pour toi est sincère et profond. S'il te plaît, pardonne-moi. Mon cœur n'appartient qu'à toi,Kinsan sarai babu wadda nakeso a rayuwata sama dake kuma babu wadda nake gani hankalina ya kwanta sama dake ina sanki 😍 ilove you 🥰 je t'aime 💞 Arakam💖💖أحبك يا أميرة Falmata 🫅🫅 .
+            À travers cette petite surprise, je voulais juste te rappeler à quel point mon amour pour toi est sincère et profond. S'il te plaît, pardonne-moi. Mon cœur n'appartient qu'à toi,Kinsan sarai babu wadda nakeso a rayuwata sama dake kuma babu wadda nake gani hankalina ya kwanta sama dake ina sanki 😍 ilove you 🥰 je t'aime 💞 Arakam💖💖أحبك ya أميرة Falmata 🫅🫅 .
         </p>
 
         <p class="signature">Ton amoureux qui pense fort à toi ✨</p>
-
-        <!-- Section Galerie Photo (Mettez vos plus belles photos ensemble ici) -->
-        <div class="gallery">
-            <img src="image1.jpg" alt="Notre souvenir 1">
-            <img src="image2.jpg" alt="Notre souvenir 2">
-        </div>
     </div>
 
 </body>
